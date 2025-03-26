@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Country Info Fetcher</title>
+  
+	<style>body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 400px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+input {
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+#result {
+    margin-top: 20px;
+    text-align: left;
+}
+
+.country-flag {
+    width: 100px;
+    display: block;
+    margin: 10px auto;
+}
+</style>
+</head>
+<body>
+  
+
+    <script>
+	/*
+fetch('https://restcountries.com/v3.1/all')
+  .then(response => response.json())
+  .then(data => {
+    for (let i = 0; i < data.length; i++) {
+      console.log(`Country: ${data[i].name.common}, Capital: ${data[i].capital ? data[i].capital[0] : 'N/A'}`);
+    }
+  })
+  .catch(error => console.error('Error fetching data:', error));
+//alt_spelling  property hai if first index,capital ka zero index, official name exist than deipslay first index  not found if not existers
+*/
+	fetch('https://restcountries.com/v3.1/all')
+  .then(response => response.json())
+  .then(data => {
+    for (let i = 0; i < data.length; i++) {
+      let country = data[i];
+      
+      let altSpelling = country.altSpellings && country.altSpellings.length > 0 ? country.altSpellings[0] : 'Not Found';
+      let capital = country.capital && country.capital.length > 0 ? country.capital[0] : 'Not Found';
+      let officialName = country.name && country.name.official ? country.name.official : 'Not Found';
+
+      console.log(` ${altSpelling}, ${capital},  ${officialName}`);
+    }
+  })
+  .catch(error => console.error('Error fetching data:', error));
+
+	</script>
+</body>
+</html>
